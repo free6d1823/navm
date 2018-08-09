@@ -30,7 +30,9 @@ SOURCES += \
     car.cpp \
     objloader.cpp \
     parts.cpp \
-    videosource.cpp
+    videosource.cpp \
+    CameraManager.cpp \
+    camerasource.cpp
 
 HEADERS += \
         mainwidget.h \
@@ -40,7 +42,8 @@ HEADERS += \
     car.h \
     objloader.h \
     parts.h \
-    videosource.h
+    videosource.h \
+    CameraManager.h
 
 
 RESOURCES += \

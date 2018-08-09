@@ -23,7 +23,7 @@ pthread_mutex_t m_lock;
 #define YUV2B(Y, U, V) CLIP(( 298 * C(Y) + 516 * D(U)              + 128) >> 8)
 
 
-void YuyvToRgb32(unsigned char* pYuv, int width, int height, unsigned char* pRgb)
+void Yuv411ToRgb32(unsigned char* pYuv, int width, int height, unsigned char* pRgb)
 {
     int nBps = width*4;
     unsigned char* pY1 = pYuv;
@@ -75,13 +75,13 @@ void YuyvToRgb32(unsigned char* pYuv, int width, int height, unsigned char* pRgb
     }
 }
 
-int m_nWriteIndex = 0;
+static int m_nWriteIndex = 0;
 
 //filse simulation
-int m_nTotalFrames = 0;
-int m_nNextFrame = -1;
-FILE*   m_pFile = NULL;
-int m_nBytesPerFrame; //yuv frame
+static int m_nTotalFrames = 0;
+static int m_nNextFrame = -1;
+static FILE*   m_pFile = NULL;
+static int m_nBytesPerFrame; //yuv frame
 
 
 VideoSource::VideoSource()
@@ -127,7 +127,7 @@ unsigned char * VideoSource::GetFrameData()
         printf("Warring: no buffer [%d] state=%d!\n", indexR, m_frameInfo[indexR].state);
     } else {
 
-        YuyvToRgb32(m_frameInfo[indexR].pData, m_nWidth, m_nHeight,
+        Yuv411ToRgb32(m_frameInfo[indexR].pData, m_nWidth, m_nHeight,
                 m_pData);
 
         m_frameInfo[indexR].state = STATE_FREE;

@@ -31,12 +31,29 @@ protected:
 
     int m_nWidth;
     int m_nHeight;
-    int m_nBytesPerLine;
+    int m_nBytesPerLine; //source stride
     //ping-pong buffers
     unsigned char* m_pData;//RGB888
     FrameInfo m_frameInfo[MAX_BUFFERS];
 
 
+};
+class CameraSource
+{
+public:
+    CameraSource();
+    ~CameraSource();
+
+    int Width(){return m_nWidth;}
+    int Height() {return m_nHeight;}
+    unsigned char * GetFrameData();
+    int DoFramePostProcess(void* pInBuffer, int width, int height, int stride, void* pOut);
+protected:
+    bool init();
+    int m_nWidth;
+    int m_nHeight;
+    //ping-pong buffers
+    unsigned char* m_pData;//RGB888
 };
 
 #endif // VIDEOSOURCE_H

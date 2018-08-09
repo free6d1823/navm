@@ -38,7 +38,7 @@ bool Parts::loadModelToBuffers(const char* pathModel)
     vector<QVector3D> indexed_normals;
     indexVBO(vertices, uvs, normals, indexed_indices, indexed_vertices, indexed_uvs, indexed_normals);
     m_nNumToDraw = indexed_indices.size();
-#if 1
+#if 0
     float mx, my, mz, nx,ny,nz;
     mx = my = mz = nx = ny = nz = 0;
     int nVert = indexed_vertices.size();

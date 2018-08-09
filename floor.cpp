@@ -1,8 +1,11 @@
 #include "floor.h"
 #include "videosource.h"
 
+#ifdef FILE_SIM
 VideoSource* m_pVs = NULL;
-
+#else
+CameraSource* m_pVs = NULL;
+#endif
 Floor::Floor()
     : m_indexBuf(QOpenGLBuffer::IndexBuffer)
 {
@@ -12,8 +15,12 @@ Floor::Floor()
     m_arrayBuf.create();
     m_indexBuf.create();
 
-    // Initializes cube geometry and transfers it to VBOs
+#ifdef FILE_SIM
     m_pVs = new VideoSource();
+#else
+    m_pVs = new CameraSource();
+#endif
+
     init();
 }
 

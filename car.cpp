@@ -66,7 +66,7 @@ bool Car::init()
     m_pRear->init();
     //move up
     QMatrix4x4 state;
-#define PI 3.1415967f
+
     state.translate(0,0.605885,0);//initial car position
     m_pFront->setState(state);
     m_pRear->setState(state);
